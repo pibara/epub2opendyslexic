@@ -5,9 +5,11 @@ import zipfile
 import uuid
 import os
 import shutil
+import bs4
 import BeautifulSoup
 import cssutils
 import re
+from os.path import expanduser
 
 def patchcontent(filename,myuuid):
     #Fetch the XML content into a tree
@@ -84,10 +86,10 @@ font-style: italic, oblique;
 def patchtoc(filename,myuuid):
     #Fetch the XML content into a tree
     fil=open(filename,"r")
-    tree=BeautifulSoup.BeautifulSoup(fil.read())
+    tree=bs4.BeautifulSoup(fil.read(),"xml")
     fil.close()
     #Update the uuid
-    tree.head.find("meta",{"name" : "dtb:uid"}).attrMap["content"]=myuuid
+    tree.head.find("meta",{"name" : "dtb:uid"})["content"]=myuuid
     #Write the updated tree back to xml
     fil=open(filename,"w")
     fil.write(tree.prettify())
@@ -108,8 +110,10 @@ class ToOpenDyslexic(object):
         """
     index.exposed = True
     def upload(self, myFile):
-        workdir = "/home/rob/work/"
-        debug = True
+        workdir = expanduser("~") + "/.epub2opendyslexic"
+        if not os.path.exists(workdir):
+            os.mkdir(workdir)
+        debug = False
         #First check for nasty hacking tricks in filename.
         if "/" in myFile.filename :
             return "<html><body><h1>Invalid filename</h1></body></html>"
@@ -119,8 +123,8 @@ class ToOpenDyslexic(object):
         #Determine input/output filenames and paths.
         infilename = myFile.filename
         outfilename = infilename[:infilename.rindex(".")] + "-opendyslexic.epub"
-        infile=workdir + infilename
-        outfile=workdir + outfilename
+        infile=workdir + "/" + infilename
+        outfile=workdir + "/" + outfilename
         #First write the uploaded file to the working dir.
         inputfile=open(infile ,"w")            
         size = 0
@@ -132,7 +136,7 @@ class ToOpenDyslexic(object):
             inputfile.write(data)
         inputfile.close()
         #Determine a directory path for our temporary stuff.
-        tmpdir=workdir + myFile.filename +"-zipdata.tmp"
+        tmpdir=workdir + "/" + myFile.filename +"-zipdata.tmp"
         #See if the file we got was an actual zipfile just for sure.
         try:
             epubold=zipfile.ZipFile(infile,"r")
@@ -192,7 +196,9 @@ class ToOpenDyslexic(object):
                          content_type='.epub',name=outfilename)
         #Once we have the response created, we don't need to keep a copy no more.
         if not debug:
-            os.unlink(filename)
+            #FIXME: we don't want to be keeping this, but things currently go wrong if we don't.
+            #os.unlink(filename)
+            pass
         #Return the converted epub file
         return result
     upload.exposed = True

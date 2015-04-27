@@ -101,7 +101,7 @@ class ToOpenDyslexic(object):
         #Return a very basic upload form
         return """
         <html><body>
-            <h2>Smashwords Opendyslexic epub comverter</h2>
+            <h2>Smashwords Opendyslexic epub converter</h2>
             <form action="upload" method="post" enctype="multipart/form-data">
             filename: <input type="file" name="myFile" /><br />
             <input type="submit" />

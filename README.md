@@ -10,16 +10,22 @@ So who is this for? Its for people who:
 * Don't own a device that allows for easy installation of custom fonts.
 * Do have a reader or tablet with an App (like Google Play Books) that while not supporting custom installation of fonts, does respect epub-embeded fonts when used inside of the epub cascading stylesheet definition.
 
+So what does it do:
+* Embed the OpenDyslexic fonts into the epub file.
+* Make the epub file use the embedded OpenDyslexic font.
+* Make sure the base line-height is at least 130%
+* Make sure the base font size is at least 1.125em
+* Update the embedded cover art to show its an OpenDyslexic version.
+* If a full-size cover-art jpeg is submitter instead of an epub: update it to show its an OpenDyslexic version. (This last one is meant purely for Smashwords authors who want to resubmit the converted epub to Smashwords using the updated cover art image.
+
 Most of the time I have the latest beta of this server tunning on a VM on my home PC. Its not on 24/7, but its on pretty often, 
 so if you have any epubs from smashwords published authors, please give it a try:
 
 http://timelord-ninja.xs4all.nl/
 
 If you are a SmashWords published author and would like to make an OpenDyslexic version of your book available, 
-please drop me a message on rob@timelord.ninja for help with getting a proper OpenDyslexic-release cover-art into 
-your converted epub, or if you want an updated copyright notice for your OpenDyslexic-release. My help to authors 
-is absolutely free, but I ask that you at least consider making the OpenDyslexic release free of charge. If you wish
-to do so, I shall help by updating the copyright notice to read:  
+and you want an updated copyright notice for your OpenDyslexic-release, drop me a message if you want the 
+copyright notice to read:  
 
     This version of this eBook is made available at zero cost in support 
     of people with cognitive disabilities who don't own a reading device 
@@ -35,11 +41,7 @@ to do so, I shall help by updating the copyright notice to read:
     than also please return to smashwords and purchase the regular edition of 
     this eBook.
 
-At a later date I shall try to make a seperate form aimed specificaly at SmashWords
-authors that will allow the uploading of updated cover art and a checkbox for replacing
-the copyright notice with the above text. For now wowever, if you are a smashwords author
-please contact me with your epub and special-edition cover art and I will do this for you 
-manualy.
+At the moment the copyright update requires manual work that I would be happy to do for you.
 
 Currently this is a one man sparetime project and I don't have much time for extensive testing.
 If you run into any issues or have any sugestions or even would like to offer a bit of help with
